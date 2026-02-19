@@ -8,10 +8,17 @@ const navItems = [
     {
         label: "Home",
         href: "/",
+        // Outline icon
         icon: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+        ),
+        // Filled icon for active state
+        activeIcon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M12 2.1L1 12h3v9a1 1 0 001 1h5v-6h4v6h5a1 1 0 001-1v-9h3L12 2.1z" />
             </svg>
         ),
     },
@@ -19,9 +26,15 @@ const navItems = [
         label: "Blog",
         href: "/blog",
         icon: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 20h9" />
                 <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </svg>
+        ),
+        activeIcon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                <rect x="3" y="20" width="18" height="1.5" rx="0.75" />
             </svg>
         ),
     },
@@ -29,9 +42,15 @@ const navItems = [
         label: "About",
         href: "/about",
         icon: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
+            </svg>
+        ),
+        activeIcon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <circle cx="12" cy="7" r="4" />
+                <path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2H4z" />
             </svg>
         ),
     },
@@ -39,9 +58,15 @@ const navItems = [
         label: "Contact",
         href: "/contact",
         icon: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,13 2,6" />
+            </svg>
+        ),
+        activeIcon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M2 6c0-1.1.9-2 2-2h16a2 2 0 012 2l-10 7L2 6z" />
+                <path d="M2 8l10 7 10-7v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8z" />
             </svg>
         ),
     },
@@ -55,24 +80,12 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
     const pathname = usePathname();
 
     if (variant === "bottom") {
-        // iOS 26 Liquid Glass tab bar
+        // Telegram-style iOS 26 Liquid Glass tab bar
         return (
             <div className="fixed bottom-0 left-0 right-0 z-[100] md:hidden pointer-events-none">
-                <div className="flex justify-center px-4 pb-2 safe-bottom pointer-events-auto">
+                <div className="flex justify-center px-5 pb-3 safe-bottom pointer-events-auto">
                     <nav
-                        className="flex items-center justify-around w-full max-w-[360px] px-2 py-2 rounded-[22px]"
-                        style={{
-                            background:
-                                "linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.35) 50%, rgba(240,245,255,0.45) 100%)",
-                            backdropFilter: "blur(40px) saturate(180%)",
-                            WebkitBackdropFilter: "blur(40px) saturate(180%)",
-                            boxShadow:
-                                "0 0 0 0.5px rgba(255,255,255,0.6), " +
-                                "0 2px 8px rgba(0,0,0,0.06), " +
-                                "0 8px 32px rgba(0,0,0,0.08), " +
-                                "inset 0 1px 0 rgba(255,255,255,0.5), " +
-                                "inset 0 -0.5px 0 rgba(0,0,0,0.05)",
-                        }}
+                        className="liquid-glass-bar flex items-center justify-around w-full max-w-[320px] px-1 py-1.5 rounded-[28px]"
                     >
                         {navItems.map((item) => {
                             const isActive =
@@ -83,39 +96,32 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className="relative flex flex-col items-center gap-[2px] py-1 px-4 rounded-2xl transition-all duration-200 active:scale-95"
+                                    className="relative flex flex-col items-center justify-center w-[60px] h-[44px] rounded-[20px] transition-all duration-200 active:scale-90"
                                 >
+                                    {/* Active glass pill */}
                                     {isActive && (
                                         <motion.div
-                                            layoutId="glass-pill"
-                                            className="absolute inset-0 rounded-2xl"
-                                            style={{
-                                                background:
-                                                    "linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)",
-                                                boxShadow:
-                                                    "0 0 0 0.5px rgba(255,255,255,0.5), " +
-                                                    "0 1px 4px rgba(0,0,0,0.06), " +
-                                                    "inset 0 1px 0 rgba(255,255,255,0.6)",
-                                            }}
+                                            layoutId="telegram-pill"
+                                            className="absolute inset-0 rounded-[20px] liquid-glass-pill"
                                             transition={{
                                                 type: "spring",
-                                                stiffness: 400,
-                                                damping: 30,
+                                                stiffness: 500,
+                                                damping: 35,
                                             }}
                                         />
                                     )}
                                     <span
-                                        className={`relative z-10 transition-colors duration-200 ${isActive
-                                                ? "text-blue-500"
-                                                : "text-gray-400/80"
+                                        className={`relative z-10 transition-all duration-200 ${isActive
+                                                ? "text-blue-500 scale-105"
+                                                : "text-gray-500/60"
                                             }`}
                                     >
-                                        {item.icon}
+                                        {isActive ? item.activeIcon : item.icon}
                                     </span>
                                     <span
-                                        className={`relative z-10 text-[10px] font-semibold tracking-tight transition-colors duration-200 ${isActive
-                                                ? "text-blue-600"
-                                                : "text-gray-400/70"
+                                        className={`relative z-10 text-[9px] font-semibold tracking-wide mt-[-1px] transition-all duration-200 ${isActive
+                                                ? "text-blue-500 opacity-100"
+                                                : "text-gray-500/50 opacity-0 scale-90"
                                             }`}
                                     >
                                         {item.label}
