@@ -159,29 +159,41 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
     const pathname = usePathname();
 
     if (variant === "bottom") {
-        // iOS 26 Liquid Glass — matches reference: frosted opaque glass, floating high
+        // iOS 26 Liquid Glass — semi-transparent frosted, content refracts through
         return (
-            <div className="fixed bottom-12 left-0 right-0 z-[100] md:hidden pointer-events-none safe-bottom">
+            <div className="fixed bottom-14 left-0 right-0 z-[100] md:hidden pointer-events-none safe-bottom">
                 <div className="flex justify-center px-6 pointer-events-auto">
                     <nav
-                        className="relative flex items-center justify-around w-full max-w-[320px] px-2 py-[6px] rounded-[22px]"
+                        className="relative flex items-center justify-around w-full max-w-[320px] px-2 py-[6px] rounded-[24px] overflow-hidden"
                         style={{
                             background:
                                 "linear-gradient(180deg, " +
-                                "rgba(240,240,245,0.82) 0%, " +
-                                "rgba(235,235,240,0.78) 50%, " +
-                                "rgba(230,230,238,0.75) 100%)",
-                            backdropFilter: "blur(60px) saturate(180%)",
-                            WebkitBackdropFilter: "blur(60px) saturate(180%)",
-                            border: "0.5px solid rgba(255,255,255,0.6)",
+                                "rgba(245,245,250,0.55) 0%, " +
+                                "rgba(240,240,248,0.48) 50%, " +
+                                "rgba(235,235,245,0.45) 100%)",
+                            backdropFilter: "blur(80px) saturate(200%) brightness(1.08)",
+                            WebkitBackdropFilter: "blur(80px) saturate(200%) brightness(1.08)",
+                            border: "0.5px solid rgba(255,255,255,0.55)",
                             boxShadow:
-                                "0 0 0 0.5px rgba(0,0,0,0.06), " +
-                                "0 8px 32px rgba(0,0,0,0.10), " +
-                                "0 2px 8px rgba(0,0,0,0.05), " +
-                                "inset 0 1px 0 rgba(255,255,255,0.7), " +
+                                "0 0 0 0.5px rgba(0,0,0,0.05), " +
+                                "0 10px 40px rgba(0,0,0,0.12), " +
+                                "0 2px 8px rgba(0,0,0,0.06), " +
+                                "inset 0 1.5px 0 rgba(255,255,255,0.65), " +
                                 "inset 0 -0.5px 0 rgba(0,0,0,0.04)",
                         }}
                     >
+                        {/* Specular highlight — light refraction across top surface */}
+                        <div
+                            className="absolute top-0 left-[8%] right-[8%] h-[50%] rounded-b-full pointer-events-none z-0"
+                            style={{
+                                background:
+                                    "linear-gradient(180deg, " +
+                                    "rgba(255,255,255,0.40) 0%, " +
+                                    "rgba(255,255,255,0.10) 50%, " +
+                                    "transparent 100%)",
+                            }}
+                        />
+
                         {navItems.map((item) => {
                             const isActive =
                                 item.href === "/"
