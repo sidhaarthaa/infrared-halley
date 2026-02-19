@@ -91,19 +91,19 @@ function TabItem({ item, isActive }: { item: typeof navItems[0]; isActive: boole
         <Link
             href={item.href}
             onClick={handleTap}
-            className="relative flex flex-col items-center justify-center w-[60px] h-[50px] rounded-[20px] touch-manipulation"
+            className="relative flex flex-col items-center justify-center w-[68px] h-[54px] rounded-[18px] touch-manipulation"
         >
-            {/* Active glass pill */}
+            {/* Active pill — bright white oval like in iOS 26 */}
             {isActive && (
                 <motion.div
                     layoutId="apple-music-pill"
-                    className="absolute inset-1 rounded-[16px]"
+                    className="absolute inset-[3px] rounded-[15px]"
                     style={{
-                        background: "linear-gradient(180deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.20) 100%)",
+                        background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(245,245,250,0.85) 100%)",
                         boxShadow:
-                            "inset 0 1px 0 rgba(255,255,255,0.7), " +
-                            "inset 0 -0.5px 0 rgba(0,0,0,0.05), " +
-                            "0 1px 4px rgba(0,0,0,0.04)",
+                            "0 1px 4px rgba(0,0,0,0.06), " +
+                            "0 0 0 0.5px rgba(0,0,0,0.04), " +
+                            "inset 0 1px 0 rgba(255,255,255,1)",
                     }}
                     transition={{
                         type: "spring",
@@ -127,22 +127,22 @@ function TabItem({ item, isActive }: { item: typeof navItems[0]; isActive: boole
                             damping: 28,
                             mass: 0.6,
                         }}
-                        className={`block ${isActive ? "text-blue-500" : "text-gray-400/70"}`}
+                        className={`block ${isActive ? "text-blue-500" : "text-gray-700"}`}
                     >
                         {isActive ? item.activeIcon : item.icon}
                     </motion.span>
                 </AnimatePresence>
             </motion.div>
 
-            {/* Label */}
+            {/* Label — always visible, dark when inactive, blue when active */}
             <motion.span
                 initial={false}
                 animate={{
-                    opacity: isActive ? 1 : 0.5,
-                    y: isActive ? 0 : 2,
+                    opacity: 1,
+                    y: isActive ? 0 : 1,
                 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className={`relative z-10 text-[10px] font-semibold leading-none mt-[2px] ${isActive ? "text-blue-500" : "text-gray-400/50"
+                className={`relative z-10 text-[10px] font-semibold leading-none mt-[2px] ${isActive ? "text-blue-500" : "text-gray-600"
                     }`}
             >
                 {item.label}
@@ -159,43 +159,29 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
     const pathname = usePathname();
 
     if (variant === "bottom") {
-        // Apple Music iOS 26 - floating liquid glass tab bar
+        // iOS 26 Liquid Glass — matches reference: frosted opaque glass, floating high
         return (
-            <div className="fixed bottom-0 left-0 right-0 z-[100] md:hidden pointer-events-none">
-                {/* Big bottom gap */}
-                <div className="flex justify-center px-8 pb-28 safe-bottom pointer-events-auto">
+            <div className="fixed bottom-12 left-0 right-0 z-[100] md:hidden pointer-events-none safe-bottom">
+                <div className="flex justify-center px-6 pointer-events-auto">
                     <nav
-                        className="relative flex items-center justify-around w-full max-w-[310px] px-1 py-[5px] rounded-full overflow-hidden"
+                        className="relative flex items-center justify-around w-full max-w-[320px] px-2 py-[6px] rounded-[22px]"
                         style={{
                             background:
-                                "linear-gradient(160deg, " +
-                                "rgba(255,255,255,0.22) 0%, " +
-                                "rgba(255,255,255,0.12) 40%, " +
-                                "rgba(210,225,255,0.15) 70%, " +
-                                "rgba(255,255,255,0.18) 100%)",
-                            backdropFilter: "blur(80px) saturate(200%) brightness(1.15) contrast(1.05)",
-                            WebkitBackdropFilter: "blur(80px) saturate(200%) brightness(1.15) contrast(1.05)",
-                            border: "0.5px solid rgba(255,255,255,0.45)",
+                                "linear-gradient(180deg, " +
+                                "rgba(240,240,245,0.82) 0%, " +
+                                "rgba(235,235,240,0.78) 50%, " +
+                                "rgba(230,230,238,0.75) 100%)",
+                            backdropFilter: "blur(60px) saturate(180%)",
+                            WebkitBackdropFilter: "blur(60px) saturate(180%)",
+                            border: "0.5px solid rgba(255,255,255,0.6)",
                             boxShadow:
-                                "0 0 0 0.5px rgba(255,255,255,0.20), " +
-                                "0 12px 48px rgba(0,0,0,0.15), " +
-                                "0 4px 12px rgba(0,0,0,0.08), " +
-                                "inset 0 1px 0 rgba(255,255,255,0.40), " +
-                                "inset 0 -0.5px 0 rgba(0,0,0,0.06)",
+                                "0 0 0 0.5px rgba(0,0,0,0.06), " +
+                                "0 8px 32px rgba(0,0,0,0.10), " +
+                                "0 2px 8px rgba(0,0,0,0.05), " +
+                                "inset 0 1px 0 rgba(255,255,255,0.7), " +
+                                "inset 0 -0.5px 0 rgba(0,0,0,0.04)",
                         }}
                     >
-                        {/* Specular highlight — the curved light reflection across the top */}
-                        <div
-                            className="absolute top-0 left-[10%] right-[10%] h-[45%] rounded-full pointer-events-none"
-                            style={{
-                                background:
-                                    "linear-gradient(180deg, " +
-                                    "rgba(255,255,255,0.35) 0%, " +
-                                    "rgba(255,255,255,0.08) 60%, " +
-                                    "transparent 100%)",
-                            }}
-                        />
-
                         {navItems.map((item) => {
                             const isActive =
                                 item.href === "/"
