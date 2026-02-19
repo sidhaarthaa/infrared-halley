@@ -2,20 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useAnimation, AnimatePresence } from "framer-motion";
+import { useCallback } from "react";
 
 const navItems = [
     {
         label: "Home",
         href: "/",
-        // Outline icon
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
         ),
-        // Filled icon for active state
         activeIcon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                 <path d="M12 2.1L1 12h3v9a1 1 0 001 1h5v-6h4v6h5a1 1 0 001-1v-9h3L12 2.1z" />
@@ -72,6 +71,91 @@ const navItems = [
     },
 ];
 
+// Telegram-style bounce animation on tap
+function TabItem({ item, isActive }: { item: typeof navItems[0]; isActive: boolean }) {
+    const controls = useAnimation();
+
+    const handleTap = useCallback(() => {
+        // Telegram bounce: quick jump up + scale, then settle
+        controls.start({
+            y: [0, -6, 0],
+            scale: [1, 1.2, 1],
+            transition: {
+                duration: 0.4,
+                times: [0, 0.3, 1],
+                ease: [0.34, 1.56, 0.64, 1], // overshoot easing
+            },
+        });
+    }, [controls]);
+
+    return (
+        <Link
+            key={item.href}
+            href={item.href}
+            onClick={handleTap}
+            className="relative flex flex-col items-center justify-center w-[64px] h-[48px] rounded-[22px] touch-manipulation"
+        >
+            {/* Active glass pill background */}
+            {isActive && (
+                <motion.div
+                    layoutId="telegram-pill"
+                    className="absolute inset-0 rounded-[22px] liquid-glass-pill"
+                    transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 35,
+                    }}
+                />
+            )}
+
+            {/* Icon with bounce animation */}
+            <motion.div
+                animate={controls}
+                className="relative z-10"
+            >
+                <AnimatePresence mode="wait" initial={false}>
+                    <motion.span
+                        key={isActive ? "filled" : "outline"}
+                        initial={{ opacity: 0, scale: 0.5, rotate: -8 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                        exit={{ opacity: 0, scale: 0.5, rotate: 8 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 600,
+                            damping: 25,
+                            mass: 0.5,
+                        }}
+                        className={`block transition-colors duration-150 ${isActive ? "text-blue-500" : "text-gray-500/50"
+                            }`}
+                    >
+                        {isActive ? item.activeIcon : item.icon}
+                    </motion.span>
+                </AnimatePresence>
+            </motion.div>
+
+            {/* Label — visible only when active, slides in from below */}
+            <motion.span
+                initial={false}
+                animate={{
+                    opacity: isActive ? 1 : 0,
+                    y: isActive ? 0 : 4,
+                    scale: isActive ? 1 : 0.8,
+                }}
+                transition={{
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25,
+                    delay: isActive ? 0.05 : 0,
+                }}
+                className={`relative z-10 text-[9px] font-semibold tracking-wide leading-none ${isActive ? "text-blue-500" : "text-gray-500/40"
+                    }`}
+            >
+                {item.label}
+            </motion.span>
+        </Link>
+    );
+}
+
 interface NavPillsProps {
     variant?: "top" | "bottom";
 }
@@ -80,54 +164,17 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
     const pathname = usePathname();
 
     if (variant === "bottom") {
-        // Telegram-style iOS 26 Liquid Glass tab bar
         return (
             <div className="fixed bottom-0 left-0 right-0 z-[100] md:hidden pointer-events-none">
-                <div className="flex justify-center px-5 pb-3 safe-bottom pointer-events-auto">
-                    <nav
-                        className="liquid-glass-bar flex items-center justify-around w-full max-w-[320px] px-1 py-1.5 rounded-[28px]"
-                    >
+                {/* Extra bottom gap — pb-4 + safe area */}
+                <div className="flex justify-center px-5 pb-4 safe-bottom pointer-events-auto">
+                    <nav className="liquid-glass-bar flex items-center justify-around w-full max-w-[300px] px-1.5 py-1 rounded-[26px]">
                         {navItems.map((item) => {
                             const isActive =
                                 item.href === "/"
                                     ? pathname === "/"
                                     : pathname.startsWith(item.href);
-                            return (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className="relative flex flex-col items-center justify-center w-[60px] h-[44px] rounded-[20px] transition-all duration-200 active:scale-90"
-                                >
-                                    {/* Active glass pill */}
-                                    {isActive && (
-                                        <motion.div
-                                            layoutId="telegram-pill"
-                                            className="absolute inset-0 rounded-[20px] liquid-glass-pill"
-                                            transition={{
-                                                type: "spring",
-                                                stiffness: 500,
-                                                damping: 35,
-                                            }}
-                                        />
-                                    )}
-                                    <span
-                                        className={`relative z-10 transition-all duration-200 ${isActive
-                                                ? "text-blue-500 scale-105"
-                                                : "text-gray-500/60"
-                                            }`}
-                                    >
-                                        {isActive ? item.activeIcon : item.icon}
-                                    </span>
-                                    <span
-                                        className={`relative z-10 text-[9px] font-semibold tracking-wide mt-[-1px] transition-all duration-200 ${isActive
-                                                ? "text-blue-500 opacity-100"
-                                                : "text-gray-500/50 opacity-0 scale-90"
-                                            }`}
-                                    >
-                                        {item.label}
-                                    </span>
-                                </Link>
-                            );
+                            return <TabItem key={item.href} item={item} isActive={isActive} />;
                         })}
                     </nav>
                 </div>
