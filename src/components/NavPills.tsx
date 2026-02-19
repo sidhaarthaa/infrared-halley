@@ -167,7 +167,7 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
         return (
             <div className="fixed bottom-0 left-0 right-0 z-[100] md:hidden pointer-events-none">
                 {/* Extra bottom gap — pb-4 + safe area */}
-                <div className="flex justify-center px-5 pb-4 safe-bottom pointer-events-auto">
+                <div className="flex justify-center px-5 pb-8 safe-bottom pointer-events-auto">
                     <nav className="liquid-glass-bar flex items-center justify-around w-full max-w-[300px] px-1.5 py-1 rounded-[26px]">
                         {navItems.map((item) => {
                             const isActive =
