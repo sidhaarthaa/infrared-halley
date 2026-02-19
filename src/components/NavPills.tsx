@@ -91,13 +91,13 @@ function TabItem({ item, isActive }: { item: typeof navItems[0]; isActive: boole
         <Link
             href={item.href}
             onClick={handleTap}
-            className="relative flex flex-col items-center justify-center w-[68px] h-[56px] rounded-[22px] touch-manipulation"
+            className="relative flex flex-col items-center justify-center w-[60px] h-[50px] rounded-[20px] touch-manipulation"
         >
             {/* Active glass pill */}
             {isActive && (
                 <motion.div
                     layoutId="apple-music-pill"
-                    className="absolute inset-1 rounded-[18px]"
+                    className="absolute inset-1 rounded-[16px]"
                     style={{
                         background: "linear-gradient(180deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.20) 100%)",
                         boxShadow:
@@ -163,24 +163,25 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
         return (
             <div className="fixed bottom-0 left-0 right-0 z-[100] md:hidden pointer-events-none">
                 {/* Large bottom gap - lifts the bar well above browser chrome */}
-                <div className="flex justify-center px-6 pb-16 safe-bottom pointer-events-auto">
+                <div className="flex justify-center px-6 pb-24 safe-bottom pointer-events-auto">
                     <nav
-                        className="flex items-center justify-around w-full max-w-[360px] px-2 py-[6px] rounded-full"
+                        className="flex items-center justify-around w-full max-w-[320px] px-1.5 py-[5px] rounded-full"
                         style={{
                             background:
-                                "linear-gradient(135deg, " +
-                                "rgba(255,255,255,0.40) 0%, " +
-                                "rgba(245,248,255,0.30) 40%, " +
-                                "rgba(255,255,255,0.35) 100%)",
-                            backdropFilter: "blur(80px) saturate(220%) brightness(1.08)",
-                            WebkitBackdropFilter: "blur(80px) saturate(220%) brightness(1.08)",
-                            border: "0.5px solid rgba(255,255,255,0.50)",
+                                "linear-gradient(160deg, " +
+                                "rgba(255,255,255,0.55) 0%, " +
+                                "rgba(255,255,255,0.30) 30%, " +
+                                "rgba(230,240,255,0.35) 60%, " +
+                                "rgba(255,255,255,0.45) 100%)",
+                            backdropFilter: "blur(100px) saturate(250%) brightness(1.1)",
+                            WebkitBackdropFilter: "blur(100px) saturate(250%) brightness(1.1)",
+                            border: "0.5px solid rgba(255,255,255,0.65)",
                             boxShadow:
-                                "0 0 0 0.5px rgba(255,255,255,0.25), " +
-                                "0 8px 32px rgba(0,0,0,0.10), " +
-                                "0 2px 8px rgba(0,0,0,0.06), " +
-                                "inset 0 1.5px 0 rgba(255,255,255,0.50), " +
-                                "inset 0 -1px 0 rgba(255,255,255,0.15)",
+                                "0 0 0 0.5px rgba(255,255,255,0.35), " +
+                                "0 10px 40px rgba(0,0,0,0.12), " +
+                                "0 2px 10px rgba(0,0,0,0.06), " +
+                                "inset 0 2px 0 rgba(255,255,255,0.60), " +
+                                "inset 0 -1px 0 rgba(255,255,255,0.20)",
                         }}
                     >
                         {navItems.map((item) => {
