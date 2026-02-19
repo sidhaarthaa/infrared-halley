@@ -162,28 +162,40 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
         // Apple Music iOS 26 - floating liquid glass tab bar
         return (
             <div className="fixed bottom-0 left-0 right-0 z-[100] md:hidden pointer-events-none">
-                {/* Large bottom gap - lifts the bar well above browser chrome */}
-                <div className="flex justify-center px-6 pb-24 safe-bottom pointer-events-auto">
+                {/* Big bottom gap */}
+                <div className="flex justify-center px-8 pb-28 safe-bottom pointer-events-auto">
                     <nav
-                        className="flex items-center justify-around w-full max-w-[320px] px-1.5 py-[5px] rounded-full"
+                        className="relative flex items-center justify-around w-full max-w-[310px] px-1 py-[5px] rounded-full overflow-hidden"
                         style={{
                             background:
                                 "linear-gradient(160deg, " +
-                                "rgba(255,255,255,0.55) 0%, " +
-                                "rgba(255,255,255,0.30) 30%, " +
-                                "rgba(230,240,255,0.35) 60%, " +
-                                "rgba(255,255,255,0.45) 100%)",
-                            backdropFilter: "blur(100px) saturate(250%) brightness(1.1)",
-                            WebkitBackdropFilter: "blur(100px) saturate(250%) brightness(1.1)",
-                            border: "0.5px solid rgba(255,255,255,0.65)",
+                                "rgba(255,255,255,0.22) 0%, " +
+                                "rgba(255,255,255,0.12) 40%, " +
+                                "rgba(210,225,255,0.15) 70%, " +
+                                "rgba(255,255,255,0.18) 100%)",
+                            backdropFilter: "blur(80px) saturate(200%) brightness(1.15) contrast(1.05)",
+                            WebkitBackdropFilter: "blur(80px) saturate(200%) brightness(1.15) contrast(1.05)",
+                            border: "0.5px solid rgba(255,255,255,0.45)",
                             boxShadow:
-                                "0 0 0 0.5px rgba(255,255,255,0.35), " +
-                                "0 10px 40px rgba(0,0,0,0.12), " +
-                                "0 2px 10px rgba(0,0,0,0.06), " +
-                                "inset 0 2px 0 rgba(255,255,255,0.60), " +
-                                "inset 0 -1px 0 rgba(255,255,255,0.20)",
+                                "0 0 0 0.5px rgba(255,255,255,0.20), " +
+                                "0 12px 48px rgba(0,0,0,0.15), " +
+                                "0 4px 12px rgba(0,0,0,0.08), " +
+                                "inset 0 1px 0 rgba(255,255,255,0.40), " +
+                                "inset 0 -0.5px 0 rgba(0,0,0,0.06)",
                         }}
                     >
+                        {/* Specular highlight — the curved light reflection across the top */}
+                        <div
+                            className="absolute top-0 left-[10%] right-[10%] h-[45%] rounded-full pointer-events-none"
+                            style={{
+                                background:
+                                    "linear-gradient(180deg, " +
+                                    "rgba(255,255,255,0.35) 0%, " +
+                                    "rgba(255,255,255,0.08) 60%, " +
+                                    "transparent 100%)",
+                            }}
+                        />
+
                         {navItems.map((item) => {
                             const isActive =
                                 item.href === "/"
