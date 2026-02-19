@@ -57,7 +57,7 @@ export default function Home() {
                 key={post.slug}
                 href={`/blog/${post.slug}`}
                 data-cursor="pointer"
-                className="group block p-4 sm:p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-200"
+                className="group block p-4 sm:p-5 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-200 glass-card-interactive"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
                   <div className="flex-1 min-w-0">

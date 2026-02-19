@@ -42,7 +42,7 @@ export default function ContactPage() {
                                 data-cursor="pointer"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group flex items-center justify-between p-3.5 sm:p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-200"
+                                className="group flex items-center justify-between p-3.5 sm:p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-200 glass-card-interactive"
                             >
                                 <span className="text-[12px] sm:text-[13px] text-gray-400">
                                     {item.label}

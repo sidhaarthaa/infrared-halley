@@ -30,7 +30,7 @@ export default function BlogPage() {
                             key={post.slug}
                             href={`/blog/${post.slug}`}
                             data-cursor="pointer"
-                            className="group block p-4 sm:p-6 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-200"
+                            className="group block p-4 sm:p-6 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all duration-200 glass-card-interactive"
                         >
                             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4 mb-1.5 sm:mb-2">
                                 <h2 className="text-[14px] sm:text-[16px] font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">

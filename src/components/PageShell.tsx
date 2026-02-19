@@ -62,7 +62,7 @@ export default function PageShell({ children }: PageShellProps) {
             <div className="flex items-center justify-center min-h-screen p-3 sm:p-6 md:p-12 pb-20 md:pb-12">
                 <div className="relative w-full max-w-[960px]">
                     <motion.div
-                        className="relative w-full min-h-[85vh] bg-white rounded-xl sm:rounded-2xl overflow-hidden"
+                        className="relative w-full min-h-[85vh] glass-card md:bg-white rounded-xl sm:rounded-2xl overflow-hidden"
                         animate={{
                             x: sidebarOpen && !isMobile ? 140 : 0,
                             scale: sidebarOpen && !isMobile ? 0.97 : 1,
