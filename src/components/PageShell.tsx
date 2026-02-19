@@ -25,6 +25,24 @@ export default function PageShell({ children }: PageShellProps) {
         return () => window.removeEventListener("resize", check);
     }, []);
 
+    // Haptic vibration on mobile tap
+    useEffect(() => {
+        if (typeof window === "undefined" || !("vibrate" in navigator)) return;
+
+        const handleTouch = (e: TouchEvent) => {
+            const target = e.target as HTMLElement;
+            const interactive = target.closest(
+                'a, button, [data-cursor="pointer"], [role="button"]'
+            );
+            if (interactive) {
+                navigator.vibrate(8);
+            }
+        };
+
+        document.addEventListener("touchstart", handleTouch, { passive: true });
+        return () => document.removeEventListener("touchstart", handleTouch);
+    }, []);
+
     useEffect(() => {
         if (isMobile && sidebarOpen) {
             document.body.style.overflow = "hidden";
