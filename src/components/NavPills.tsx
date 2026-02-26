@@ -156,24 +156,24 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
         // iOS 26 Liquid Glass tab bar — matching Apple Music: translucent, content colors bleed through
         return (
             <div className="fixed bottom-6 left-0 right-0 z-[100] md:hidden pointer-events-none safe-bottom">
-                <div className="flex justify-center px-3 pointer-events-auto">
+                <div className="flex justify-center px-4 pointer-events-auto">
                     <nav
-                        className="relative flex items-center w-full max-w-[94vw] px-[6px] py-[5px] rounded-[16px] overflow-hidden"
+                        className="relative flex items-center w-full max-w-[360px] px-[6px] py-[5px] rounded-[16px] overflow-hidden"
                         style={{
                             background:
                                 "linear-gradient(180deg, " +
-                                "rgba(255,255,255,0.72) 0%, " +
-                                "rgba(250,250,255,0.65) 50%, " +
-                                "rgba(248,248,254,0.62) 100%)",
-                            backdropFilter: "blur(80px) saturate(200%) brightness(1.05)",
-                            WebkitBackdropFilter: "blur(80px) saturate(200%) brightness(1.05)",
-                            border: "0.5px solid rgba(255,255,255,0.6)",
+                                "rgba(255,255,255,0.94) 0%, " +
+                                "rgba(248,248,252,0.90) 50%, " +
+                                "rgba(245,245,250,0.88) 100%)",
+                            backdropFilter: "blur(60px) saturate(180%)",
+                            WebkitBackdropFilter: "blur(60px) saturate(180%)",
+                            border: "0.5px solid rgba(255,255,255,0.7)",
                             boxShadow:
                                 "0 0 0 0.5px rgba(0,0,0,0.04), " +
-                                "0 8px 40px rgba(0,0,0,0.10), " +
-                                "0 2px 8px rgba(0,0,0,0.05), " +
-                                "inset 0 1.5px 0 rgba(255,255,255,0.7), " +
-                                "inset 0 -0.5px 0 rgba(0,0,0,0.03)",
+                                "0 4px 24px rgba(0,0,0,0.08), " +
+                                "0 1px 4px rgba(0,0,0,0.04), " +
+                                "inset 0 1px 0 rgba(255,255,255,0.8), " +
+                                "inset 0 -0.5px 0 rgba(0,0,0,0.02)",
                         }}
                     >
                         {/* Specular highlight — top edge refraction */}
