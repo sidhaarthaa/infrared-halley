@@ -97,7 +97,7 @@ function TabItem({ item, isActive }: { item: typeof navItems[0]; isActive: boole
             {isActive && (
                 <motion.div
                     layoutId="ios26-pill"
-                    className="absolute inset-[4px] rounded-[14px]"
+                    className="absolute inset-[4px] rounded-full"
                     style={{
                         background: "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(240,240,245,0.88) 100%)",
                         boxShadow:
