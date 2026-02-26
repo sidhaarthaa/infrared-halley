@@ -158,7 +158,7 @@ export default function NavPills({ variant = "top" }: NavPillsProps) {
             <div className="fixed bottom-6 left-0 right-0 z-[100] md:hidden pointer-events-none safe-bottom">
                 <div className="flex justify-center px-3 pointer-events-auto">
                     <nav
-                        className="relative flex items-center w-full max-w-[94vw] px-[6px] py-[5px] rounded-[22px] overflow-hidden"
+                        className="relative flex items-center w-full max-w-[94vw] px-[6px] py-[5px] rounded-[16px] overflow-hidden"
                         style={{
                             background:
                                 "linear-gradient(180deg, " +
